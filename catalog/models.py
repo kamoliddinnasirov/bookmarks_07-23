@@ -56,6 +56,8 @@ class Author(models.Model):
     def __str__(self) -> str:
         return self.last_name
     
+    
+    
 
 class Book(models.Model):
     title = models.CharField(max_length=200,
@@ -74,7 +76,7 @@ class Book(models.Model):
                             help_text="Input year publications",
                             verbose_name="Year publications")
 
-    author = models.ManyToManyField('Author',
+    authors = models.ManyToManyField('Author',
                                     help_text="Choice author book",
                                     verbose_name="Author(authors) book")
 
@@ -98,6 +100,9 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse("book-detail", args=[str(self.id)])
 
+    def display_author(self):
+        return ', '.join([author.last_name for author in self.authors.all()])
+    display_author.short_description = 'Authors'
 
 class Status(models.Model):
     name = models.CharField(max_length=20,
@@ -110,7 +115,7 @@ class Status(models.Model):
 
 
 class BookInstance(models.Model):
-    book = models.ForeignKey('Book', on_delete=models.CASCADE,null=True)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE, null=True)
 
     inv_nom = models.CharField(max_length=20, null=True, help_text="Input inv number",
                                verbose_name="Inv number book")
