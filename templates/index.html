@@ -1,0 +1,55 @@
+{% extends "layouts/base.html"%}
+{% block title %}Bookmarks{% endblock %}
+{% block header %}
+    <h5>{{ text_head }}</h5>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid my-2">
+    <div class="row bg-success text-white mx-2">
+        <div class="col text-center">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row text-center text-dark lh-2">
+        <h4>Data in DB</h4>
+    </div>
+    <div class="row my-2 text-white">
+        <div class="col-2 mx-2 bg-primary">
+            Count book - {{ num_books }}
+        </div>
+        <div class="col-2 mx-2 bg-primary">
+            Ombordagi kitoblar soni - {{ num_instances }}
+        </div>
+
+        <div class="col-2 mx-2 bg-primary">
+            Authors count - {{ num_authors }}
+        </div>
+    </div>
+
+    <div class="row text-center text-dark lh-2">
+        <h3>Books</h3>
+    </div>
+    {% if num_books > 0 %}
+        <div class="row my-2">
+            {% for obj in books %}
+                <div class="card" style="width:  9rem;">
+                    <img src="{{ obj.photo.url }}" alt="book photo" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text small">
+                            {{obj.title}}. Price:{{obj.price}}$
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
