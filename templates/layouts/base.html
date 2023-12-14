@@ -43,8 +43,8 @@
         <div class="col-2">
             {% block sidebar%}
                 <nav class="nav flex-column">
-                    <a href="{% url 'index' %}" class="nav-link">Ssilka 1</a>
-                    <a href="{% url 'index' %}" class="nav-link">Ssilka 2</a>
+                    <a href="{% url 'books' %}" class="nav-link">All books</a>
+                    <a href="{% url 'index' %}" class="nav-link">All authors</a>
                     <a href="{% url 'index' %}" class="nav-link">Ssilka 3</a>
                 </nav>
             {% endblock %}
@@ -62,7 +62,7 @@
     <div class="container-fluid">
         <div class="row bg-primary text-center text-white lh-1">
             {% block footer %}
-                <p>This is site (footer) all page</p>
+                <p>Copyright OOO "Nasirov Kamoliddin"</p>
             {% endblock %}
         </div>
     </div>

@@ -2,6 +2,21 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from catalog.models import Author, Book, BookInstance, Genre, Language, \
                                 Publisher, Status
+from django.views.generic import ListView, DeleteView, DetailView
+
+
+
+class BookDetail(DetailView):
+    model = Book 
+    context_object_name = 'book'
+    template_name = "book_detail.html"
+
+
+class BookListView(ListView):
+    model = Book
+    context_object_name = 'books'
+    template_name = 'book_list.html'
+
 
 
 def index(request):

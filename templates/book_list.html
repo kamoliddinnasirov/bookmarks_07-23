@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="row text-center text-dark lh2">
+            <h4>List books in DB</h4>
+    </div>
+    {% if books %}
+    <table class="table table-striped table-bordered text-start">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Cover</th>
+                <th>Show cover</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for book in books%}
+                <tr>
+                    <td><a href="{{book.id}}">{{book.title}}</a></td>
+                    <td>{{book.display_author}}</td>
+                    <td>{{book.genre}}</td>
+                    <td>
+                        <img src="{{book.photo.url}}" alt="content" style="max-height: 100px;">
+                    </td>
+                    <td>
+                        <a href="{{ book.photo.url }}" class="btn btn-primary" target="_blank">Show</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Not found books in DB</p>
+    {% endif %}
+{% endblock%}
