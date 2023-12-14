@@ -6,7 +6,7 @@ from django.views.generic import ListView, DeleteView, DetailView
 
 
 
-class BookDetail(DetailView):
+class BookDetailView(DetailView):
     model = Book 
     context_object_name = 'book'
     template_name = "book_detail.html"
@@ -16,6 +16,7 @@ class BookListView(ListView):
     model = Book
     context_object_name = 'books'
     template_name = 'book_list.html'
+    paginate_by = 3 
 
 
 

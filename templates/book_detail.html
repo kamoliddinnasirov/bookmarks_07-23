@@ -1,0 +1,67 @@
+{% extends "layouts/base.html"%}
+{% block content %}
+    <div class="container text-start">
+        <div class="row my-2">
+            <h1>Name book - "{{book.title}}"</h1>
+        </div>
+
+        <div class="row my-2">
+            <p><strong>Author:</strong></p>
+            {% for author in book.author.all %}
+                <a href="">{{author.first_name}} {{author.last_name}}</a>
+            {% endfor %}
+        </div>
+
+        <img src="{{book.photo.url}}" alt="content" style="max-height: 200px;">
+
+        <a href="{{ book.photo.url }}" class="btn btn-primary" target="_blank">show</a>
+
+        <div class="row my-2">
+            <div class="col">
+                <p><strong>Price:</strong>{{book.price}}$</p>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <p><strong>Summary:</strong>{{book.summary}}</p>
+        </div>
+
+        <div class="row my-2">
+            <div class="col mx-2 bg-primary text-white">
+                <p><strong>Genre:</strong>{{book.genre}}</p>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col mx-2 bg-primary text-white">
+                <p><strong>ISBN:</strong>{{book.isbn}}</p>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col mx-2 bg-primary text-white">
+                <p><strong>Lang:</strong>{{book.language}}</p>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col mx-2 bg-primary text-white">
+                <p><strong>Publisher:</strong>{{book.publisher}}</p>
+            </div>
+        </div>
+    </div>
+    <div style="margin-left: 20px; margin-top: 10px;">
+        <h4>Count example books in DB</h4>
+        {% for copy in book.bookinstance_set.all%}
+        <hr>
+            <p class="text-muted">
+                <strong>№:</strong>{{ copy.id }}
+            </p>
+            <p class="text-success">
+                <strong>Status books:</strong>{{ copy.status}}
+            </p>
+
+        {% endfor %}
+    </div>
+
+{% endblock%}
