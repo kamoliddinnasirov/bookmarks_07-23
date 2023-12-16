@@ -18,7 +18,8 @@
     <div class="row text-center text-dark lh-2">
         <h4>Data in DB</h4>
     </div>
-    <div class="row my-2 text-white">
+    <div class="container_2">
+        <div class="row my-2 text-white">
         <div class="col-2 mx-2 bg-primary">
             Count book - {{ num_books }}
         </div>
@@ -30,6 +31,7 @@
             Authors count - {{ num_authors }}
         </div>
     </div>
+</div>
 
     <div class="row text-center text-dark lh-2">
         <h3>Books</h3>
@@ -38,7 +40,7 @@
         <div class="row my-2">
             {% for obj in books %}
                 <div class="card" style="width:  9rem;">
-                    <img src="{{ obj.photo.url }}" alt="book photo" class="card-img-top">
+                    <img src="{{ obj.photo.url }}" alt="book photo" class="card-img-top" >
                     <div class="card-body">
                         <p class="card-text small">
                             {{obj.title}}. Price:{{obj.price}}$

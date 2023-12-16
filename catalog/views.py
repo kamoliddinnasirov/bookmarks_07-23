@@ -5,6 +5,46 @@ from catalog.models import Author, Book, BookInstance, Genre, Language, \
 from django.views.generic import ListView, DeleteView, DetailView
 
 
+def about(request):
+    text_head = "About us"
+    name = "OOO Kamoliddin online book shop"
+    rab1 = "System developments"
+    rab2 = "Book write"
+    rab3 = "Book read"
+    rab4 = "Create online book for peoples"
+
+    context = {
+        "text_head" : text_head,
+        "name" : name,
+        "rab1" : rab1,
+        "rab2" : rab2,
+        "rab3" : rab3,
+        "rab4" : rab4,
+    }
+
+    return render(request, "about.html", context)
+
+
+def contact(request):
+    text_head = "Contact"
+    name = "OOO Kamoliddin online book shop"
+    address = "Alisher Navoiy 204/1"
+    tel = "99-888-77-66"
+    email = "kamoliddinnasirov@mail.ru"
+    context = {
+        "text_head" : text_head,
+        "name" : name,
+        "address" : address,
+        "tel" : tel,
+        "email" : email,
+    }
+
+    return render(request, "contact.html", context)
+
+
+
+
+
 class AuthorDetailView(DetailView):
     model = Author
     template_name = "author_detail.html"

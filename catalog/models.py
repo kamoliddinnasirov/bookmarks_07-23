@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse 
+from django_resized import ResizedImageField
 
 
 
@@ -91,7 +92,8 @@ class Book(models.Model):
 
     photo = models.ImageField(upload_to="books/%Y/%m/%d",
                               help_text="Input image book",
-                              verbose_name="Image book")
+                              verbose_name="Image book", )
+    photo_size = ResizedImageField(size=[118, 167],  upload_to=get_image_path, blank=True, null=True)
 
     def __str__(self) -> str:
         return self.title 
