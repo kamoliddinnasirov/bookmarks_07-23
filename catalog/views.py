@@ -5,6 +5,12 @@ from catalog.models import Author, Book, BookInstance, Genre, Language, \
 from django.views.generic import ListView, DeleteView, DetailView
 
 
+class AuthorListView(ListView):
+    model = Author
+    paginate_by = 4
+    template_name = "authors_list.html"
+
+
 
 class BookDetailView(DetailView):
     model = Book 
