@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse 
 from django_resized import ResizedImageField
+from django.contrib.auth.models import User
+from datetime import date
 
 
 
@@ -127,11 +129,23 @@ class BookInstance(models.Model):
     due_back = models.DateField(null=True, blank=True, help_text="Input end status",
                                 verbose_name="Date end status")
     
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, 
+                                 null=True, blank=True, verbose_name='customer', help_text="Choices customers")
+    
     class Meta:
         ordering = ['due_back']
 
     def __str__(self) -> str:
         return '%s %s %s' % (self.inv_nom, self.book, self.status)
+    
+
+
+@property
+def is_overdue(self):
+    if self.due_back and date.today() > self.due_back:
+        return True
+    return False
+
 
 
     
