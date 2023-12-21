@@ -1,0 +1,47 @@
+{% extends "layouts/base.html"%}
+{% block content %}
+{% if form.errors%}
+    <p>
+        Sizning parolingiz yoki loginingiz noto'g'ri! Iltimos 5 daqiqadan so'ng yana bir bor urinib ko'ring!
+    </p>
+{% endif %}
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>
+            Sizda bu saytga kirish uchun huquqingiz yo'q!
+        </p>
+    {% else %}
+        <p>
+            Saytga kirish uchun registratsiyadan o'ting!
+        </p>
+    {% endif%}
+{% endif %}
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <div class="row my-2 text-center">
+        <div class="col-4">
+            <table class="table table-bordered my-2 text-start">
+                <tr>
+                    <td>{{ form.username.label_tag}}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag}}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-8"></div>
+    </div>
+    <div class="row my-2 text-start">
+        <div class="col-4">
+            <input type="submit" value="Kirish">
+            <input type="hidden" name="next"value='{{next}}'>
+            <p><a href="{% url 'password_reset'%}">Parolingizni unutdingizmi?</a></p>
+        </div>
+    </div>
+    <div class="col-8"></div>
+</form>
+
+
+{% endblock%}
