@@ -1,0 +1,23 @@
+{% extends "layouts/base.html"%}
+{% block content %}
+<h1>books received</h1>
+{% if bookinstance_list %}
+    {% for bookinst in bookinstance_list%}
+        <div class="{% if bookinst.is_overdue %} text-danger{% endif %}">
+            <a href="{% url 'book-detail' bookinsts.book.pk %}"> <!--url 1/book-detail/-->
+                {{ bookinst.book.title }}
+            </a>
+            {{ bookinst.due_back }}
+        </div>
+    {% endfor %}
+{% else %}
+<p>Not books for borrows</p>
+{% endif %}
+
+
+
+
+
+
+
+{% endblock %}
