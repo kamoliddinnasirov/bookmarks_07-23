@@ -57,7 +57,8 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'logout' %}?next={{request.path}}" class="nav-link">Exit</a>
                         <div>Kirdi: {{ user.get_username }}</div>
-                        <a href="{% url 'edit_author'%}" class="nav-link">Edit author</a>
+                        <a href="{% url 'edit_authors'%}" class="nav-link">Edit author</a>
+                        <a href="{% url 'edit_books'%}" class="nav-link">Edit book</a>
                         <a href="{% url 'my-borrowed' %}" class="nav-link">My borrowed</a>
                     {% else %}
                         <a href="{% url 'login'%}?next={{request.path}}" class="nav-link">Login</a>

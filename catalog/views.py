@@ -4,14 +4,54 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from catalog.models import Author, Book, BookInstance, Genre, Language, \
                                 Publisher, Status
-from django.views.generic import ListView, DeleteView, DetailView
+from django.views.generic import ListView, DeleteView, DetailView, CreateView, \
+                                UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import Form_add_author, Form_edit_author
 from django.urls import reverse
+from django.urls import reverse_lazy
 
 
 
 
+class BookDetailView(DetailView):
+    model = Book 
+    context_object_name = 'book'
+    template_name = "book_detail.html"
+
+
+class BookListView(ListView):
+    model = Book
+    context_object_name = 'books'
+    template_name = 'book_list.html'
+    paginate_by = 3 
+
+
+class BookCreate(CreateView):
+    model = Book
+    fields = "__all__"
+    success_url = reverse_lazy("edit_books")
+    template_name = "book_form.html"
+
+class BookUpdate(UpdateView):
+    model = Book
+    fields = "__all__"
+    success_url = reverse_lazy("edit_books")
+    
+
+
+class BookDelete(DeleteView):
+    model = Book
+    # fields = "__all__"
+    success_url = reverse_lazy("edit_books")
+    template_name = "book_confirm_delete.html"
+
+
+
+def edit_books(request):
+    book = Book.objects.all()
+    context = {'book' : book}
+    return render(request, 'edit_books.html', context)
 
 
 def delete(request, id):
@@ -56,14 +96,17 @@ def edit_author(request, id):
         form = Form_edit_author(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/edit_authors/")
+            return HttpResponseRedirect("/edit_authors/") #author/edit_authors/
     else:
-        form = Form_edit_author(instance=instance)
+        form = Form_edit_author(instance=author)
         content ={"form" : form}
         return render(request, "edit_author.html", content)
 
-    # context = {"author": author}
-    # return render(request, "edit_authors.html", context)
+
+def edit_authors(request):
+    author = Author.objects.all()
+    context = {"author" : author}
+    return render(request, "edit_authors.html", context)
 
 class LoanedBooksByUserListView(LoginRequiredMixin, ListView):
     model = BookInstance
@@ -129,17 +172,7 @@ class AuthorListView(ListView):
 
 
 
-class BookDetailView(DetailView):
-    model = Book 
-    context_object_name = 'book'
-    template_name = "book_detail.html"
 
-
-class BookListView(ListView):
-    model = Book
-    context_object_name = 'books'
-    template_name = 'book_list.html'
-    paginate_by = 3 
 
 
 

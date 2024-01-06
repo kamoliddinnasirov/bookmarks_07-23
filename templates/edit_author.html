@@ -1,0 +1,22 @@
+{% extends "layouts/base.html"%}
+{% block content %}
+    <div class="row text-start lh-2">
+        <h3>Edit about author</h3>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="text-start">
+            {% for field in form %}
+            <tr>
+                <th>{{ field.label_tag}}
+                    {{ field.errors }}
+                </th>
+                <th>{{field}}</th>
+            </tr>
+            {% endfor %}
+            <th>
+                <button type="submit">Save</button>
+            </th>
+        </table>
+    </form>
+{% endblock%}
